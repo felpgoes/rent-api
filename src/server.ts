@@ -1,12 +1,10 @@
-import express from 'express';
+import express from 'express'
 import '@controllers/UsersController'
 
-const app = express();
+const app = express()
 
-app.get('/', async (req, res) => {
-    return res.json({
-        message: 'hello world'
-    })
-})
+app.get('/', async (req, res) => res.json({
+  message: 'hello world'
+}))
 
-app.listen(3333);
+app.listen(3333)
