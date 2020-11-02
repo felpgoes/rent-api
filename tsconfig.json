@@ -18,8 +18,9 @@
 		"baseUrl": ".",
 		"forceConsistentCasingInFileNames": true,
 		"paths": {
-			"@controllers/*": ["./src/controllers/*"],
-			"@models/*": ["./src/models/*"]
+			"@DTO/*": ["./src/DTO/*"],
+			"@entities/*": ["./src/entities/*"],
+			"@providers/*": ["./src/providers/*"],
 		}
 	},
 	"include": [

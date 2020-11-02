@@ -15,8 +15,9 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          '@models': './src/models',
-          '@controllers': './src/controllers'
+          '@DTO': './src/DTO',
+          '@entities': './src/entities',
+          '@providers': './src/providers'
         }
       }
     ]
