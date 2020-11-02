@@ -1,10 +1,3 @@
-import express from 'express'
-import '@controllers/UsersController'
+import { app } from './app'
 
-const app = express()
-
-app.get('/', async (req, res) => res.json({
-  message: 'hello world'
-}))
-
-app.listen(3333)
+app.listen(4000)
