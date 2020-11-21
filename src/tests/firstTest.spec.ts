@@ -1,7 +1,7 @@
-import { User } from '@models/Users'
+// import { User } from '@entities/User'
 
 test('it should be ok', () => {
-  const user = new User()
+  const user = { name: '' }// 'new User()
 
   user.name = 'John Doe'
 

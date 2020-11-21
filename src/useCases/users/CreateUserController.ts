@@ -7,13 +7,20 @@ export class CreateUserController {
   ) {}
 
   async handle (req: Request, res: Response): Promise<Response> {
-    const { name, email, password } = req.body
+    const {
+      name, email, password, emailConfirmation, twoFactorConfirmation, username, document, documentType
+    } = req.body
 
     try {
       await this.createUserUseCase.execute({
         name,
         email,
-        password
+        password,
+        emailConfirmation,
+        twoFactorConfirmation,
+        username,
+        document,
+        documentType
       })
 
       return res.status(201).send()
