@@ -21,6 +21,7 @@
 			"@DTO/*": ["./src/DTO/*"],
 			"@entities/*": ["./src/entities/*"],
 			"@providers/*": ["./src/providers/*"],
+			"@lib/*": ["./src/lib/*"],
 		}
 	},
 	"include": [

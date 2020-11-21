@@ -17,6 +17,7 @@ module.exports = {
         alias: {
           '@DTO': './src/DTO',
           '@entities': './src/entities',
+          '@lib': './src/lib',
           '@providers': './src/providers'
         }
       }
