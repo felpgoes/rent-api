@@ -16,9 +16,9 @@ export interface IPhoto {
 export class Place {
   public readonly id: string;
 
+  public name: string;
   public owner: string;
   public address: IAddress;
-  public name: string;
   public photos: IPhoto[];
   public contact: string;
   public description: string;

@@ -16,6 +16,6 @@ export interface ICreatePlaceDTO {
   owner: string;
   address: IAddress;
   photos: IPhoto[];
-  contact: boolean;
+  contact: string;
   description: string;
 }
