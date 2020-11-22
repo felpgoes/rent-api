@@ -12,8 +12,8 @@ export class PostgresPlacesRepository implements IPlacesRepository {
 
     if (placeData[0]) {
       const placeImages = await db.select('*').from('images').where('place_id', placeData[0].id)
-      const placeNormalized = this.normalizeToApi(placeData[0], placeImages)
-
+      const placeOwner = await db.select('us.name as ownerName', 'us.image as ownerImage').from('users as us').where('id', '=', placeData[0].owner_id)
+      const placeNormalized = this.normalizeToApi(placeData[0], placeImages, placeOwner[0])
       return placeNormalized
     }
   }
@@ -48,7 +48,7 @@ export class PostgresPlacesRepository implements IPlacesRepository {
     }
 
     const results = await db
-      .select(db.raw('pl.*, im.url as url, us.name as ownerName'))
+      .select(db.raw('pl.*, im.url as url, us.name as ownerName, us.image as ownerImage'))
       .from('place as pl')
       .leftJoin('images as im', 'pl.id', '=', 'im.place_id')
       .leftJoin('users as us', 'us.id', '=', 'pl.owner_id')
@@ -72,6 +72,8 @@ export class PostgresPlacesRepository implements IPlacesRepository {
       neighborhood: data.address.neighborhood,
       zipcode: data.address.zipcode,
       country: data.address.country,
+      city: data.address.city,
+      state: data.address.state,
       name: data.name,
       owner_id: data.owner,
       contact: data.contact,
@@ -96,7 +98,7 @@ export class PostgresPlacesRepository implements IPlacesRepository {
     }
   }
 
-  private normalizeToApi (data: any, images: any) {
+  private normalizeToApi (data: any, images: any, owner: any) {
     return {
       id: data.id,
       address: {
@@ -105,12 +107,16 @@ export class PostgresPlacesRepository implements IPlacesRepository {
         complement: data.complement,
         neighborhood: data.neighborhood,
         zipcode: data.zipcode,
-        country: data.country
+        country: data.country,
+        city: data.city,
+        state: data.state
       },
       name: data.name,
       owner: data.owner_id,
       contact: data.contact,
       description: data.description,
+      ownerImage: owner.ownerImage,
+      ownerName: owner.ownerName,
       photos: images.map((image: any) => ({ url: image.url }))
     } as Place
   }

@@ -4,7 +4,9 @@ export interface IAddress {
   complement: string,
   neighborhood: string,
   zipcode:string,
-  country: string
+  country: string,
+  city: string,
+  state: string
 }
 
 export interface IPhoto {
