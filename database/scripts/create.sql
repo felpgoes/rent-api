@@ -18,7 +18,7 @@ CREATE TABLE login_token (
 )
 
 CREATE TABLE place (
-    id varchar(25) NOT NULL,
+    id varchar(50) NOT NULL,
     street varchar(50) NOT NULL,
     number integer NOT NULL,
     complement varchar(50) NULL,
@@ -26,13 +26,13 @@ CREATE TABLE place (
     zipcode varchar(10) NOT NULL,
     country varchar(25) NOT NULL,
     name varchar(50) NOT NULL,
-    owner_id varchar(25) NOT NULL,
+    owner_id varchar(50) NOT NULL,
     contact varchar(25) NOT NULL,
     description varchar(255) NOT NULL
 )
 
 CREATE TABLE images (
-    id varchar(25) NOT NULL,
-    place_id varchar(25) NOT NULL,
+    id varchar(50) NOT NULL,
+    place_id varchar(50) NOT NULL,
     url varchar(50) NOT NULL
 )
