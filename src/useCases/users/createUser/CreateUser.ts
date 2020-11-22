@@ -11,22 +11,20 @@ export class CreateUserUseCase {
 
   async execute (data: ICreateUserRequestDTO) {
     const userAlreadyExists = await this.usersRepository.findByEmail(data.email)
-    console.log('userAlreadyExists: ', userAlreadyExists)
     if (userAlreadyExists) {
       throw new Error('User already exists.')
     }
 
     const user = new User(data)
     await this.usersRepository.save(user)
-
     await this.mailProvider.sendEmail({
       to: {
         name: data.name,
         email: data.email
       },
       from: {
-        name: 'Equipe Rent',
-        email: 'noreply@rent.io'
+        name: 'Equipe Rent Aí',
+        email: 'felipe.goess@hotmail.com'
       },
       subject: 'Seja bem-vindo à plataforma!',
       body: '<p>Você já pode fazer login na nossa plataforma!</p>'

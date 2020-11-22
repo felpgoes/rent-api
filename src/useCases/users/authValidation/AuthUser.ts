@@ -49,7 +49,7 @@ export class AuthUserUseCase {
       },
       from: {
         name: 'Equipe Rent Aí',
-        email: 'noreply@rentai.io'
+        email: 'felipe.goess@hotmail.com'
       },
       subject: 'Token de Login - Rent Aí',
       body: `<div>
