@@ -13,8 +13,8 @@ import { CreateUserController } from './createUser/CreateUserController'
 // end createUser use case
 
 // start getUser use case
-import { GetUserCase } from './getUser/GetUser'
-import { GetUserCaseController } from './getUser/GetUserController'
+import { GetUserUseCase } from './getUser/GetUser'
+import { GetUserUseCaseController } from './getUser/GetUserController'
 // end getUser use case
 
 // start getUser use case
@@ -40,11 +40,11 @@ const createUserController = new CreateUserController(
   createUserUseCase
 )
 
-const getUserUseCase = new GetUserCase(
+const getUserUseCase = new GetUserUseCase(
   postgresUsersRepository
 )
 
-const getUserController = new GetUserCaseController(
+const getUserController = new GetUserUseCaseController(
   getUserUseCase
 )
 
@@ -67,4 +67,9 @@ const validationTokenController = new ValidateTokenController(
   validationTokenUseCase
 )
 
-export { createUserController, createUserUseCase, getUserController, getUserUseCase, authUserController, authUserUseCase, validationTokenController, validationTokenUseCase }
+export {
+  createUserController, createUserUseCase,
+  getUserController, getUserUseCase,
+  authUserController, authUserUseCase,
+  validationTokenController, validationTokenUseCase
+}

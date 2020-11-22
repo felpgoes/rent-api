@@ -1,15 +1,15 @@
 import { Request, Response } from 'express'
-import { GetUserUseCase } from './GetUser'
+import { GetPlaceUseCase } from './GetPlace'
 
-export class GetUserUseCaseController {
+export class GetPlaceController {
   constructor (
-        private GetUserUseCaseUseCase: GetUserUseCase
+        private getPlaceUseCase: GetPlaceUseCase
   ) {}
 
   async handle (req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params
-      const userData = await this.GetUserUseCaseUseCase.execute(id)
+      const userData = await this.getPlaceUseCase.execute(id)
 
       return res.status(200).json({
         data: userData
