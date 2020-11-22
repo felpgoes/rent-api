@@ -26,6 +26,8 @@ CREATE TABLE place (
     neighborhood varchar(25) NOT NULL,
     zipcode varchar(10) NOT NULL,
     country varchar(25) NOT NULL,
+    city varchar(50) NOT NULL,
+    state varchar(50) NOT NULL,
     name varchar(50) NOT NULL,
     owner_id varchar(50) NOT NULL,
     contact varchar(25) NOT NULL,
