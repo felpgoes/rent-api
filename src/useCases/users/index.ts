@@ -27,6 +27,11 @@ import { ValidateTokenUseCase } from './tokenValidation/ValidateToken'
 import { ValidateTokenController } from './tokenValidation/ValidateTokenController'
 // end ValidateToken use case
 
+// end UpdateUser use case
+import { UpdateUserUseCase } from './updateUser/UpdateUser'
+import { UpdateUserController } from './updateUser/UpdateUserController'
+// end UpdateUser use case
+
 const mailTrapMailProvider = new MailTrapMailProvider()
 const postgresUsersRepository = new PostgresUsersRepository()
 const authenticationUserRepository = new AuthenticateUserRepository()
@@ -67,9 +72,18 @@ const validationTokenController = new ValidateTokenController(
   validationTokenUseCase
 )
 
+const updateUserUseCase = new UpdateUserUseCase(
+  postgresUsersRepository
+)
+
+const updateUserController = new UpdateUserController(
+  updateUserUseCase
+)
+
 export {
   createUserController, createUserUseCase,
   getUserController, getUserUseCase,
   authUserController, authUserUseCase,
-  validationTokenController, validationTokenUseCase
+  validationTokenController, validationTokenUseCase,
+  updateUserController, updateUserUseCase
 }

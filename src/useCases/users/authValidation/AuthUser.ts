@@ -5,6 +5,7 @@ import { compare } from 'bcrypt'
 import { AuthToken } from '../../../entities/AuthToken'
 import moment from 'moment'
 import { IMailProvider } from '@providers/IMailProvider'
+import { v4 } from 'uuid'
 
 export class AuthUserUseCase {
   constructor (
@@ -30,37 +31,23 @@ export class AuthUserUseCase {
       error.statusCode = 401
       throw error
     }
-    // create token
-    const tokenCode = Math.random().toString(36).substring(7).toUpperCase()
+
+    const tokenCode = v4()
 
     const tokenData = new AuthToken({
       email: userData.email,
       token: tokenCode,
-      expires: moment().add(3, 'm')
+      expires: moment().add(1, 'h')
     })
-    this.authRepository.save(tokenData)
+    const authData = await this.authRepository.save(tokenData)
 
-    // send email here
-
-    await this.mailProvider.sendEmail({
-      to: {
-        name: userData.name,
-        email: userData.email
-      },
-      from: {
-        name: 'Equipe Rent Aí',
-        email: 'felipe.goess@hotmail.com'
-      },
-      subject: 'Token de Login - Rent Aí',
-      body: `<div>
-        <p>Olá ${userData.name}!</p>
-        <hr>
-        <p>Seu código de login é: </p>
-        <p>${tokenCode}</p>
-      </div>`
-    })
+    const { password, ...cleanUserData } = userData
     return {
-      email: userData.email
+      token: {
+        accessToken: authData.token,
+        expiresAt: authData.expires
+      },
+      user: cleanUserData
     }
   }
 }

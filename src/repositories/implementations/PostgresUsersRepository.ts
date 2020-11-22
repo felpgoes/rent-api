@@ -29,8 +29,15 @@ export class PostgresUsersRepository implements IUsersRepository {
     }
   }
 
-  async update (user: UserUpdate): Promise<void> {
+  async update (user: UserUpdate): Promise<User> {
+    const { id, ...fixedUser } = user
 
+    console.log('id = ', id)
+    console.log('fixedUser = ', fixedUser)
+
+    const updatedData = await db('users').update(fixedUser).where('id', '=', id).returning('*')
+    console.log('updatedData', updatedData)
+    return this.normalizeToApi(updatedData[0])
   }
 
   private normalizeToDB (data: User) {

@@ -1,8 +1,8 @@
 export class UserUpdate {
-    public id?: string;
+    public id: string;
     public name?: string;
     public email?: string;
-    public password?: string;
+    // public password?: string;
     public emailConfirmation?: boolean;
     public twoFactorConfirmation?: boolean;
     public username?: string;

@@ -1,18 +1,17 @@
 import { Request, Response } from 'express'
-import { UpdateUserUseCase } from './updateUser'
+import { UpdateUserUseCase } from './UpdateUser'
 
-export class UpdateUserUseCaseController {
+export class UpdateUserController {
   constructor (
-        private updateUserUseCaseUseCase: UpdateUserUseCase
+        private updateUserUseCase: UpdateUserUseCase
   ) {}
 
   async handle (req: Request, res: Response): Promise<Response> {
     try {
-    //   const { id } = req.params
-    //   const userData = await this.updateUserUseCaseUseCase.execute(id)
+      const userData = await this.updateUserUseCase.execute(req.body)
 
       return res.status(200).json({
-        data: 'olá'
+        data: userData
       })
     } catch (err) {
       return res.status(err.statusCode ?? 400).json({

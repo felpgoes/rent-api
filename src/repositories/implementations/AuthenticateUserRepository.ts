@@ -22,9 +22,18 @@ export class AuthenticateUserRepository implements IAuthRepository {
     }
   }
 
-  async save (data: AuthToken): Promise<void> {
+  async save (data: AuthToken): Promise<AuthToken> {
     await db('login_token').where('email', data.email).del()
 
-    return db.insert(data).into('login_token')
+    const tokenData = await db.insert(data).into('login_token').returning('*')
+    return this.normalizeToken(tokenData)
+  }
+
+  private normalizeToken (token: any) {
+    const cleanToken = {
+      token: token[0].token,
+      expires: token[0].expires
+    }
+    return cleanToken as AuthToken
   }
 }
