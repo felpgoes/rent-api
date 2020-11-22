@@ -1,10 +1,10 @@
-import { User } from '@entities/User'
+import { Place } from '@entities/Place'
+import { PlaceList } from '@entities/PlaceList'
 
 export interface IPlacesRepository {
-    findByFilter(email: string): Promise<User>;
-    findByOwner(email: string): Promise<User>;
+    list(page: number): Promise<PlaceList>;
     findById(id: string): Promise<any>
-    create(user: User): Promise<void>;
-    update(user: User): Promise<void>;
-    delete(user: User): Promise<void>;
+    create(place: Place): Promise<void>;
+    // update(place: Place): Promise<void>;
+    // delete(place: Place): Promise<void>;
 }
