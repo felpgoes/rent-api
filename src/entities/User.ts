@@ -11,6 +11,7 @@ export class User {
     public username: string;
     public document: string;
     public documentType: string;
+    public image?: string;
 
     constructor (props: Omit<User, 'id'>, id?: string) {
       Object.assign(this, props)

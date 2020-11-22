@@ -8,6 +8,7 @@ CREATE TABLE users (
     username varchar(25) NULL,
     document varchar(50) NOT NULL,
     document_type varchar(25) NOT NULL
+    image varchar(255) NULL
 )
 
 CREATE TABLE login_token (

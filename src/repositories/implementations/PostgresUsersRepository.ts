@@ -3,6 +3,7 @@ import { UserUpdate } from '@entities/UserUpdate'
 import { IUsersRepository } from '../IUsersRepository'
 import Database from '../../lib/Database'
 import { hash } from 'bcrypt'
+import Axios from 'axios'
 
 const db = Database.getConnection()
 
@@ -17,7 +18,12 @@ export class PostgresUsersRepository implements IUsersRepository {
 
   async save (user: User): Promise<void> {
     const password = await hash(user.password, 10)
-    const normalized = this.normalizeToDB({ ...user, password })
+    const imageData = await Axios({
+      method: 'get',
+      url: `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_KEY}&collections=277102`
+    })
+    const image = imageData.data.urls.regular
+    const normalized = this.normalizeToDB({ ...user, password, image })
     return db.insert(normalized).into('users')
   }
 
@@ -64,7 +70,8 @@ export class PostgresUsersRepository implements IUsersRepository {
       twoFactorConfirmation: data.two_factor_confirmation,
       username: data.username,
       document: data.document,
-      documentType: data.document_type
+      documentType: data.document_type,
+      image: data.image
     } as User
   }
 }
