@@ -9,10 +9,10 @@ export class GetPlaceController {
   async handle (req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params
-      const userData = await this.getPlaceUseCase.execute(id)
+      const placeData = await this.getPlaceUseCase.execute(id)
 
       return res.status(200).json({
-        data: userData
+        data: placeData
       })
     } catch (err) {
       return res.status(err.statusCode ?? 400).json({

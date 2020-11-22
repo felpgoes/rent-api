@@ -34,13 +34,9 @@ export class PostgresPlacesRepository implements IPlacesRepository {
     return places
   }
 
-  // findByFilter (email: string): Promise<User> {}
-  // update (user: User): Promise<void> {};
-  // delete (user: User): Promise<void> {};
-
   private async findPerPage (pageFilter: number) {
     const page = (pageFilter) ? pageFilter - 1 : 0
-    const limit = 2
+    const limit = 10
     const offset = limit * page
 
     const count: any = await db('place').select(db.raw('SUM(1) AS cont'))

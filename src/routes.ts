@@ -1,8 +1,8 @@
-import { createUserController, getUserController, authUserController, validationTokenController, updateUserController } from './useCases/users'
+import { createUserController, getUserController, authUserController, updateUserController } from './useCases/users'
 import { createPlaceController, getPlaceController, listPlacesController } from './useCases/places'
 import { Router } from 'express'
-// import * as middlewares from './middlewares'
-// import { app } from './app'
+import * as middlewares from './middlewares'
+import { IRequest } from '@DTO/Request.DTO'
 
 const router = Router()
 
@@ -14,14 +14,10 @@ router.post('/login', (req, res) => {
   return authUserController.handle(req, res)
 })
 
-// app.use(middlewares.authentication)
+router.use(middlewares.authentication)
 
 router.get('/users/:id', (req, res) => {
   return getUserController.handle(req, res)
-})
-
-router.post('/validateToken', (req, res) => {
-  return validationTokenController.handle(req, res)
 })
 
 router.post('/place', (req, res) => {
@@ -37,7 +33,7 @@ router.get('/place/:id', (req, res) => {
 })
 
 router.put('/user', (req, res) => {
-  return updateUserController.handle(req, res)
+  return updateUserController.handle(req as IRequest, res)
 })
 
 export { router }

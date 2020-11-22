@@ -15,9 +15,18 @@ export class AuthenticateUserRepository implements IAuthRepository {
       .andWhereRaw('expires > now() ')
 
     if (data[0]) {
-      const selectedToken = data[0]
-      await db('login_token').where('id', selectedToken.id).del()
+      return data[0]
+    }
+  }
 
+  async getData (tokenData: string): Promise<any> {
+    const data = await db
+      .select('*')
+      .from('login_token')
+      .where('token', tokenData)
+      .andWhereRaw('expires > now() ')
+
+    if (data[0]) {
       return data[0]
     }
   }

@@ -7,9 +7,15 @@ export class UpdateUserUseCase {
         private usersRepository: IUsersRepository
   ) { }
 
-  async execute (user: UserUpdate) {
-    console.log('user')
-    const existingUser = await this.usersRepository.findById(user.id)
+  async execute (data: UserUpdate, user: any) {
+    console.log('data')
+    const existingUser = await this.usersRepository.findById(data.id)
+
+    if (existingUser.id !== user.id) {
+      const error: any = new Error('Not authorized to update user.')
+      error.statusCode = 401
+      throw error
+    }
 
     if (!existingUser) {
       const error: any = new Error('User not exists.')
@@ -17,7 +23,7 @@ export class UpdateUserUseCase {
       throw error
     }
 
-    const newUserData = await this.usersRepository.update(user)
+    const newUserData = await this.usersRepository.update(data)
 
     return new User(newUserData, existingUser.id)
   }

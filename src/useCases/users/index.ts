@@ -22,11 +22,6 @@ import { AuthUserUseCase } from './authValidation/AuthUser'
 import { AuthUserController } from './authValidation/AuthUserController'
 // end getUser use case
 
-// end ValidateToken use case
-import { ValidateTokenUseCase } from './tokenValidation/ValidateToken'
-import { ValidateTokenController } from './tokenValidation/ValidateTokenController'
-// end ValidateToken use case
-
 // end UpdateUser use case
 import { UpdateUserUseCase } from './updateUser/UpdateUser'
 import { UpdateUserController } from './updateUser/UpdateUserController'
@@ -63,15 +58,6 @@ const authUserController = new AuthUserController(
   authUserUseCase
 )
 
-const validationTokenUseCase = new ValidateTokenUseCase(
-  authenticationUserRepository,
-  postgresUsersRepository
-)
-
-const validationTokenController = new ValidateTokenController(
-  validationTokenUseCase
-)
-
 const updateUserUseCase = new UpdateUserUseCase(
   postgresUsersRepository
 )
@@ -84,6 +70,5 @@ export {
   createUserController, createUserUseCase,
   getUserController, getUserUseCase,
   authUserController, authUserUseCase,
-  validationTokenController, validationTokenUseCase,
   updateUserController, updateUserUseCase
 }
