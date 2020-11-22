@@ -15,8 +15,8 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          '@DTO': './src/DTO',
           '@entities': './src/entities',
+          '@DTO': './src/DTO',
           '@lib': './src/lib',
           '@providers': './src/providers'
         }

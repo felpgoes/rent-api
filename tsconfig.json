@@ -18,8 +18,8 @@
 		"baseUrl": ".",
 		"forceConsistentCasingInFileNames": true,
 		"paths": {
-			"@DTO/*": ["./src/DTO/*"],
 			"@entities/*": ["./src/entities/*"],
+			"@DTO/*": ["./src/DTO/*"],
 			"@providers/*": ["./src/providers/*"],
 			"@lib/*": ["./src/lib/*"],
 		}

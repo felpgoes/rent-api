@@ -9,6 +9,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.21.12",
+    "moment": "^2.29.1",
     "nodemailer": "^6.4.14",
     "pg": "^8.5.1",
     "uuidv4": "^6.2.4"
@@ -39,7 +40,7 @@
     "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules  src/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "node dist/server.js"
+    "start": "ts-node src/config/server.ts"
   },
   "repository": {
     "type": "git",
