@@ -1,4 +1,5 @@
-import { Request, Response } from 'express'
+import { IRequest } from '@DTO/Request.DTO'
+import { Response } from 'express'
 import { CreatePlaceUseCase } from './CreatePlace'
 
 export class CreatePlaceController {
@@ -6,12 +7,12 @@ export class CreatePlaceController {
         private createPlaceUseCase: CreatePlaceUseCase
   ) {}
 
-  async handle (req: Request, res: Response): Promise<Response> {
+  async handle (req: IRequest, res: Response): Promise<Response> {
     // name owner address photos contact description
     const {
-      name, owner, address, photos, contact, description
+      name, address, photos, contact, description
     } = req.body
-
+    const owner = req.user.id
     try {
       await this.createPlaceUseCase.execute({
         name, owner, address, photos, contact, description

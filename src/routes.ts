@@ -21,7 +21,7 @@ router.get('/users/:id', (req, res) => {
 })
 
 router.post('/place', (req, res) => {
-  return createPlaceController.handle(req, res)
+  return createPlaceController.handle(req as IRequest, res)
 })
 
 router.get('/place/list', (req, res) => {

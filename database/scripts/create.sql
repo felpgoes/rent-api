@@ -34,5 +34,5 @@ CREATE TABLE place (
 CREATE TABLE images (
     id varchar(50) NOT NULL,
     place_id varchar(50) NOT NULL,
-    url varchar(50) NOT NULL
+    url varchar(255) NOT NULL
 )

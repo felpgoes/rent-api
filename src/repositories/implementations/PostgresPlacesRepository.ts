@@ -2,6 +2,7 @@ import { Place } from '@entities/Place'
 import { IPlacesRepository } from '../IPlacesRepository'
 import Database from '../../lib/Database'
 import { v4 } from 'uuid'
+import Axios from 'axios'
 
 const db = Database.getConnection()
 
@@ -47,9 +48,10 @@ export class PostgresPlacesRepository implements IPlacesRepository {
     }
 
     const results = await db
-      .select('*')
+      .select(db.raw('pl.*, im.url as url, us.name as ownerName'))
       .from('place as pl')
-      .leftJoin('images as us', 'pl.id', '=', 'us.place_id')
+      .leftJoin('images as im', 'pl.id', '=', 'im.place_id')
+      .leftJoin('users as us', 'us.id', '=', 'pl.owner_id')
       .limit(limit)
       .offset(offset)
 
@@ -77,10 +79,15 @@ export class PostgresPlacesRepository implements IPlacesRepository {
     }
 
     const images = await Promise.all(data.photos.map(async photo => {
+      const imageData = await Axios({
+        method: 'get',
+        url: `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_KEY}&collections=277102`
+      })
+      const url = imageData.data.urls.regular
       return {
         id: v4(),
         place_id: data.id,
-        url: photo.url
+        url: url
       }
     }))
 
